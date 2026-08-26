@@ -1,0 +1,60 @@
+generated: '2026-08-26'
+method: searched
+source: https://learn.notice.co/llms.txt
+summary: >-
+  Notice publishes product announcements as an "Announcements" collection in its help centre rather
+  than as a dated API changelog. The entries below are the announcement set exactly as Notice's own
+  llms.txt lists it. NO DATES ARE RECORDED because Notice publishes none in the machine-readable
+  index, and the article pages themselves answer 403 to non-browser clients - a guessed date would
+  be a fabrication.
+scheme: product-announcements
+change_log_url: https://learn.notice.co/en/
+current_version: null
+dates_published: false
+entry_count: 9
+entries:
+  - title: Announcing Notice Price 2.0
+    date: null
+    highlight: 'Notice Price 2.0: improved handling for low-activity issuers'
+    url: https://learn.notice.co/en/articles/13473854-announcing-notice-price-2-0
+    breaking: unknown
+  - title: Announcing M&A exit values on Notice Price charts
+    date: null
+    highlight: Daily M&A exit values for all share classes on Notice Price charts for 400+ companies (Pro members).
+    url: https://learn.notice.co/en/articles/8775501-announcing-m-a-exit-values-on-notice-price-charts
+    breaking: unknown
+  - title: Announcing Enhanced Company Profiles
+    date: null
+    highlight: More detailed financing, performance and liquidity information for 6,000+ private companies.
+    url: https://learn.notice.co/en/articles/8674337-announcing-enhanced-company-profiles
+    breaking: unknown
+  - title: Three important Notice tools for startup employees
+    date: null
+    url: https://learn.notice.co/en/articles/8381900-three-important-notice-tools-for-startup-employees
+    breaking: unknown
+  - title: Announcing the Notice.co 50 Index (N50)
+    date: null
+    highlight: Weighted, real-time private market index.
+    url: https://learn.notice.co/en/articles/8341894-announcing-the-notice-co-50-index-n50
+    breaking: unknown
+  - title: Announcing Notice Rankings and Notice Industries
+    date: null
+    url: https://learn.notice.co/en/articles/8274127-announcing-notice-rankings-and-notice-industries
+    breaking: unknown
+  - title: Announcing Notice Price v1.3
+    date: null
+    url: https://learn.notice.co/en/articles/8076440-announcing-notice-price-v1-3
+    breaking: unknown
+  - title: Announcing Notice Portfolio Equity Grants
+    date: null
+    highlight: Track the value of equity grants using real-time Notice Price.
+    url: https://learn.notice.co/en/articles/8047906-announcing-notice-portfolio-equity-grants
+    breaking: unknown
+  - title: Announcing Notice Portfolio
+    date: null
+    url: https://learn.notice.co/en/articles/8002563-announcing-notice-portfolio
+    breaking: unknown
+api_changelog: null
+api_changelog_note: >-
+  None of the announcements describe an API change. No API-specific changelog exists on the public
+  surface.

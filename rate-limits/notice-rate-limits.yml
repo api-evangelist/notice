@@ -1,0 +1,32 @@
+generated: '2026-08-26'
+method: searched
+source: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
+summary: >-
+  Notice publishes exactly one quantitative limit on its API - a retrieval cadence of up to once
+  per minute - and no request quota, burst allowance, response header, or exhaustion status code.
+  An agent integrating Notice cannot tell at runtime how close it is to a limit.
+limit_count: 1
+rate_limits:
+  - id: data_retrieval_cadence
+    scope: per-subscription
+    window: 1 minute
+    limit: 1
+    unit: retrieval
+    burst: null
+    description: >-
+      "The Notice API is a RESTful API that can be used to retrieve real-time private market data
+      up to once every minute." Quoted from the help-centre article on how the Notice API works.
+    source: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
+    method: searched
+response_headers:
+  observed: []
+  documented: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header appeared on any anonymous response from
+    api.notice.co (probed 2026-08-26 on /v1/openapi.json, /v1/ and /mcp).
+exhaustion_status: null
+exhaustion_note: No 429 behaviour is documented and none was observed; the endpoints 401 before any limit is reached.
+upstream_freshness:
+  claim: Notice Price is recomputed every three seconds
+  source: https://learn.notice.co/en/articles/8338741-how-is-notice-price-determined
+  note: A publication cadence, not a client rate limit; recorded separately so the two are not conflated.

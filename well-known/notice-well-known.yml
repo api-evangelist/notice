@@ -1,0 +1,95 @@
+generated: '2026-08-26'
+method: probed
+source: live probes of /.well-known/ on every Notice host (notice.co, api.notice.co, api.stytch.notice.co)
+summary: >-
+  Three real documents are served, all of them on the API/auth plane: RFC 9728 protected-resource
+  metadata on api.notice.co (which names the MCP endpoint as the protected resource), and RFC 8414
+  authorization-server metadata plus OpenID Connect discovery on api.stytch.notice.co, the Stytch
+  authorization server that api.notice.co delegates to. That is a genuine WellKnown hit and the
+  pointer is earned. Nothing else is served on any host: no security.txt (so NO SecurityTxt
+  pointer), no api-catalog, no ai-plugin.json, and no A2A agent card at either the current or the
+  legacy path.
+pointer_basis: >-
+  WellKnown pointer emitted on the strength of the 200s on api.notice.co and api.stytch.notice.co.
+  SecurityTxt pointer NOT emitted - RFC 9116 is unimplemented on every host (404, zero bytes).
+  AgentCard pointer NOT emitted - both agent-card.json and the legacy agent.json 404 everywhere.
+probe_note: >-
+  notice.co and api.notice.co answer HTTP 403 with a Cloudflare block page for ordinary crawler
+  user-agents on HTML paths. The /.well-known/ probes below were NOT affected: each returned a
+  bare 404 with zero bytes (origin, not edge) or a real 200 JSON body, so these statuses are
+  origin truth and not a challenge artifact.
+hosts:
+  - host: https://api.notice.co
+    documents:
+      - path: /.well-known/oauth-protected-resource   # RFC 9728
+        status: 200
+        file: notice-api-oauth-protected-resource.json
+        note: 'resource: https://api.notice.co/mcp; authorization_servers: [https://api.stytch.notice.co]'
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+        checked: '2026-08-26'
+      - path: /.well-known/agent.json
+        status: 404
+        checked: '2026-08-26'
+  - host: https://api.stytch.notice.co
+    note: >-
+      Notice-controlled subdomain fronting its Stytch tenant; named as the authorization server by
+      the RFC 9728 document api.notice.co serves.
+    documents:
+      - path: /.well-known/oauth-authorization-server   # RFC 8414
+        status: 200
+        file: notice-stytch-oauth-authorization-server.json
+      - path: /.well-known/openid-configuration         # OIDC discovery
+        status: 200
+        file: notice-stytch-openid-configuration.json
+      - path: /.well-known/jwks.json
+        status: 200
+        note: referenced as jwks_uri by both documents above; not saved verbatim (key material rotates)
+  - host: https://notice.co
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+        checked: '2026-08-26'
+      - path: /.well-known/agent.json
+        status: 404
+        checked: '2026-08-26'
+other_root_documents:
+  - path: /robots.txt
+    host: https://notice.co
+    status: 200
+    file: notice-robots.txt
+    note: >-
+      Redirects to api.notice.co/robots.txt. Blocks GPTBot and ClaudeBot outright, allows
+      OAI-SearchBot / Claude-SearchBot and the user-triggered ChatGPT-User / Claude-User agents,
+      and disallows /graphql, /portfolio, /orderbook, /trade/, /indication/ and /admin for
+      everyone. Declared sitemap: https://notice.co/sitemap_priority.xml
+  - path: /llms.txt
+    host: https://notice.co
+    status: 200
+    file: ../llms/notice-llms.txt
+  - path: /llms.txt
+    host: https://learn.notice.co
+    status: 200
+    file: ../llms/notice-help-center-llms.txt

@@ -1,0 +1,63 @@
+generated: '2026-08-26'
+method: probed
+status: published
+source: https://api.notice.co/.well-known/oauth-protected-resource
+summary: >-
+  Notice runs a live, remote MCP server at https://api.notice.co/mcp. It was established by probe,
+  not by a vendor claim: an unauthenticated POST of tools/list returns HTTP 401 with a
+  WWW-Authenticate: Bearer resource_metadata=... challenge pointing at the RFC 9728 document on the
+  same host, which in turn names https://api.notice.co/mcp as the protected resource. That is the
+  MCP-over-HTTP + OAuth handshake behaving exactly as specified. The tool list itself is
+  auth-gated, so no tool names or inputSchemas are recorded here - they require authenticated
+  introspection with a Notice account.
+deployment:
+  mode: remote
+  endpoint: https://api.notice.co/mcp
+  auth: oauth
+  verified: probed
+server:
+  name: notice
+  transport: http
+  url: https://api.notice.co/mcp
+  vendor_documentation: null
+  documentation_note: >-
+    No public Notice page documents this MCP server: it is absent from notice.co/llms.txt, from the
+    learn.notice.co help centre index, and from web search. The endpoint is nonetheless live and
+    standards-shaped.
+auth:
+  methods:
+    - oauth2
+  oauth2:
+    protected_resource_metadata: https://api.notice.co/.well-known/oauth-protected-resource
+    authorization_servers:
+      - https://api.stytch.notice.co
+    authorization_endpoint: https://notice.co/oauth/authorize
+    token_endpoint: https://api.stytch.notice.co/v1/oauth2/token
+    registration_endpoint: https://api.stytch.notice.co/v1/oauth2/register
+    dynamic_client_registration: true      # RFC 7591 registration_endpoint advertised
+    pkce: S256
+    grant_types:
+      - authorization_code
+      - refresh_token
+      - 'urn:ietf:params:oauth:grant-type:jwt-bearer'
+    scopes_supported:
+      - openid
+      - profile
+      - email
+    discovery: ../well-known/notice-api-oauth-protected-resource.json
+tools_discovered: false
+tool_count: null
+tools: []
+tools_note: >-
+  tools/list returns {"error":"unauthorized"} (HTTP 401) anonymously. Names and input schemas need
+  an authenticated introspection pass; none are guessed here.
+x-evidence:
+  - probe: POST https://api.notice.co/mcp {"jsonrpc":"2.0","id":1,"method":"tools/list"}
+    http_status: 401
+    www_authenticate: 'Bearer resource_metadata="https://api.notice.co/.well-known/oauth-protected-resource"'
+    body: '{"error":"unauthorized"}'
+    fetched: '2026-08-26'
+  - probe: GET https://api.notice.co/.well-known/oauth-protected-resource
+    http_status: 200
+    content_type: application/json
+    fetched: '2026-08-26'

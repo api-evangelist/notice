@@ -1,0 +1,45 @@
+generated: '2026-08-26'
+method: probed
+source: https://notice.co/widgets/chart
+summary: >-
+  Notice ships one public embeddable component - a free real-time private-company price chart
+  delivered as a script-tag loader that injects an iframe. It is the only part of the Notice data
+  surface that a third party can consume with no account, no key and no subscription, which makes
+  it materially different from the rest of the platform.
+families:
+  - name: Charts
+    components:
+      - id: chart
+        name: Notice Chart Widget
+        type: script-embed + iframe
+        description: >-
+          Embeddable real-time chart of a private company's Notice Price history, for a website,
+          product, report or workflow. Configured on notice.co/widgets/chart and pasted as a
+          snippet.
+        loader: https://api.notice.co/widgets/chart.js
+        loader_status: 200
+        loader_content_type: application/javascript
+        iframe_base: https://api.notice.co/widgets/chart/iframe
+        parameters:
+          - name: company
+            required: true
+            description: Notice company slug (the same slug used by notice.co/c/<slug>, e.g. databricks).
+            example: databricks
+          - name: t
+            required: false
+            description: Time range for the chart series.
+            example: 1y
+        container_convention: >-
+          The loader appends the iframe to the parent node of its own <script> tag, falling back to
+          an element with id "notice-chart-container" and then to document.body.
+        global: window.NoticeChartEmbeds
+        auth: none
+        cost: free
+        verified:
+          probe: 'GET https://api.notice.co/widgets/chart.js?company=databricks&t=1y'
+          http_status: 200
+          fetched: '2026-08-26'
+component_count: 1
+note: >-
+  No other embeddable or client-side component (element library, hosted checkout, embedded
+  dashboard) was found on the reachable surface.

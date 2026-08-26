@@ -1,0 +1,42 @@
+generated: '2026-08-26'
+method: searched
+source: registry searches on npm, PyPI, RubyGems, crates.io, NuGet, Maven Central, pkg.go.dev, Packagist + the notice-co GitHub organization
+summary: >-
+  Notice publishes no client SDK in any package registry. The enterprise REST API is sold with a
+  12-month subscription and documented to subscribers only, and the sole first-party distributable
+  is an unversioned CDN-hosted widget loader. NO SDKs pointer is emitted - there is no first-party
+  client library to point at.
+package_count: 0
+packages: []
+cdn_distributions:
+  - name: Notice Chart Widget loader
+    registry: cdn
+    url: https://api.notice.co/widgets/chart.js
+    version: null
+    published: null
+    official: true
+    note: >-
+      Unpinned. The embed snippet Notice publishes loads chart.js with query parameters only - no
+      version segment, no integrity hash, and no CDN metadata endpoint (it is served from Notice's
+      own API host, not npm/jsDelivr/unpkg), so neither this pipeline nor a consumer can tell which
+      build they are getting. Recorded as version: null because it was checked and there is nothing
+      to record, not because it was skipped.
+registries_checked:
+  - registry: npm
+    query: 'registry.npmjs.org/-/v1/search?text=notice.co'
+    result: no first-party package
+  - registry: pypi
+    query: pypi.org/pypi/notice-api/json
+    result: 404
+  - registry: github
+    query: api.github.com/orgs/notice-co
+    result: >-
+      Organization exists (name "Notice", blog https://notice.co, created 2021-04-26, United States
+      of America) and is public, but carries a single repository - a fork of
+      sendbird/sendbird-uikit-react, last updated 2023-11-08. No SDK, no client, no MCP package.
+  - registry: rubygems / crates.io / nuget / maven / go / packagist
+    result: no first-party package found by name search
+abandonment_signal:
+  finding: >-
+    Not an abandoned-SDK case - there is no SDK at all. The only dated first-party artifact in any
+    registry is a 2023 UI-kit fork that is not a Notice client.

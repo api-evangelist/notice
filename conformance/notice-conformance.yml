@@ -1,0 +1,136 @@
+generated: '2026-08-26'
+method: probed
+source: live probes of the Notice auth + MCP plane (api.notice.co, api.stytch.notice.co)
+summary: >-
+  Notice conforms to the OAuth/OIDC/MCP discovery stack in full and to nothing else that can be
+  verified anonymously. The REST v1 API is behind a 401, so no contract-level standard (JSON:API,
+  RFC 9457, OData, pagination convention) can be asserted about it either way.
+standards:
+  - id: oauth2
+    name: OAuth 2.0 authorization framework (RFC 6749)
+    conforms: true
+    evidence: >-
+      authorization_code + refresh_token grants advertised by
+      https://api.stytch.notice.co/.well-known/oauth-authorization-server (HTTP 200).
+  - id: oauth2-pkce
+    name: PKCE (RFC 7636)
+    conforms: true
+    evidence: 'code_challenge_methods_supported: ["S256"] in both discovery documents.'
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+    conforms: true
+    evidence: https://api.stytch.notice.co/.well-known/oauth-authorization-server returns 200 with issuer, token_endpoint, jwks_uri.
+  - id: rfc9728
+    name: OAuth 2.0 Protected Resource Metadata (RFC 9728)
+    conforms: true
+    evidence: >-
+      https://api.notice.co/.well-known/oauth-protected-resource returns 200 naming
+      resource=https://api.notice.co/mcp and authorization_servers=[https://api.stytch.notice.co];
+      the 401 from /mcp carries the matching WWW-Authenticate resource_metadata parameter.
+  - id: rfc7591
+    name: OAuth 2.0 Dynamic Client Registration (RFC 7591)
+    conforms: true
+    evidence: 'registration_endpoint: https://api.stytch.notice.co/v1/oauth2/register advertised in RFC 8414 metadata.'
+  - id: oidc
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: >-
+      https://api.stytch.notice.co/.well-known/openid-configuration returns 200 with issuer,
+      jwks_uri, userinfo_endpoint, id_token_signing_alg_values_supported [RS256].
+  - id: mcp
+    name: Model Context Protocol (Streamable HTTP transport, OAuth authorization)
+    conforms: true
+    evidence: >-
+      https://api.notice.co/mcp answers JSON-RPC POSTs with an RFC 9728-linked 401 challenge, the
+      MCP authorization flow as specified. Tool-level conformance is unverifiable while tools/list
+      is gated.
+  - id: rfc9116
+    name: security.txt (RFC 9116)
+    conforms: false
+    evidence: 404 on /.well-known/security.txt for notice.co and api.notice.co.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: 404 on /.well-known/agent-card.json and /.well-known/agent.json for every host.
+  - id: rfc9457
+    name: Problem Details for HTTP APIs (RFC 9457)
+    conforms: false
+    evidence: >-
+      Observed error bodies are a bare {"error":"..."} object with content-type application/json,
+      not application/problem+json (401s from /mcp and /v1/openapi.json).
+  - id: openapi
+    name: OpenAPI description published
+    conforms: false
+    evidence: >-
+      https://api.notice.co/v1/openapi.json exists as a route but returns 401 {"error":"Not
+      authorized"} - the description is subscriber-only, not public.
+domain_standard:
+  assessed: true
+  standard: null
+  note: >-
+    Private secondary-market data has no adopted machine-readable domain standard comparable to
+    FIX/ISO 20022 in public markets - Notice's own product (Notice Price, Activity Score, Coverage
+    Ratio, the N50 index) is proprietary methodology published as prose in the help centre. Nothing
+    in the reachable surface declares FIX, ISO 20022, FDX, or an SEC/FINRA machine schema, and none
+    is invented here. Reward-only check: recorded as not applicable rather than failed.
+compliance_certifications: []
+compliance_note: >-
+  No trust centre, SOC 2 / ISO 27001 claim, or compliance page was reachable; notice.co HTML paths
+  answer 403 to non-browser clients, so absence here is "not found", not "does not exist". No
+  Compliance pointer is emitted.
+contract_discovery:
+  ran: '2026-08-26'
+  note: >-
+    Full STEP 0b sweep against every Notice host before concluding no public contract exists.
+    One machine-readable contract route was found and it is auth-gated; everything else missed.
+  probes:
+    - url: https://api.notice.co/v1/openapi.json
+      status: 401
+      result: 'route exists, gated ({"error":"Not authorized"}) - spec NOT saved'
+    - url: https://api.notice.co/openapi.json
+      status: 403
+      result: Cloudflare block page (HTML), not a spec
+    - url: https://api.notice.co/openapi.yaml
+      status: 403
+    - url: https://api.notice.co/swagger.json
+      status: 403
+    - url: https://api.notice.co/api-docs
+      status: 403
+    - url: https://api.notice.co/docs
+      status: 403
+    - url: https://api.notice.co/redoc
+      status: 403
+    - url: https://notice.co/openapi.json
+      status: 403
+    - url: https://notice.co/v1/openapi.json
+      status: 404
+    - url: https://notice.co/graphql
+      status: not-probed
+      result: >-
+        A GraphQL surface exists (notice.co/robots.txt disallows /graphql for every user-agent).
+        Introspection was NOT attempted because robots.txt disallows it; the schema is therefore
+        unrecorded rather than fabricated.
+    - url: https://api.notice.co/mcp
+      status: 401
+      result: live MCP server, OAuth-gated - captured in ../mcp/notice-mcp.yml
+    - url: https://api.notice.co/?wsdl
+      status: 403
+      result: no SOAP contract
+    - url: https://api.notice.co/services?singleWsdl
+      status: 403
+      result: no SOAP contract
+    - url: https://buf.build/notice
+      status: 200
+      result: >-
+        FALSE POSITIVE - Buf Schema Registry returns its SPA shell (10.7KB, title only) for any
+        owner path. No Notice protobuf module exists.
+    - url: https://api.notice.co/grpc
+      status: 403
+      result: no gRPC surface advertised
+    - url: 'registry.npmjs.org search "notice.co"'
+      status: 200
+      result: no first-party SDK
+  conclusion: >-
+    Notice publishes NO public machine-readable contract. It has one (api.notice.co/v1/openapi.json)
+    and keeps it behind the subscription, and it has a second machine surface (the MCP server) whose
+    tool schemas are behind OAuth. This is a gating decision, not an absence of engineering.

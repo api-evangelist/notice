@@ -1,0 +1,42 @@
+generated: '2026-08-26'
+method: probed
+source: live probes of api.notice.co + https://learn.notice.co/llms.txt
+summary: >-
+  Notice versions its API in the path (v1) and ships a product-announcement stream in its help
+  centre, but publishes no deprecation policy, no SLA, and no status page that could be found.
+versioning:
+  scheme: path
+  current_version: v1
+  base: https://api.notice.co/v1
+  policy_url: null
+deprecation:
+  policy_published: false
+  sunset_header: unknown
+  deprecation_header: unknown
+  rfc8594: false
+  note: >-
+    No deprecation or sunset policy is published anywhere on the reachable surface. No Deprecation
+    pointer is emitted.
+  deprecated_operations: []
+sla:
+  published: false
+  note: >-
+    The help centre states an enterprise API subscription runs a 12-month term, but no availability
+    or latency commitment is published.
+status_page:
+  url: null
+  probed:
+    - url: https://status.notice.co/
+      status: 'DNS NXDOMAIN'
+    - url: https://notice.co/status
+      status: 403
+      note: Cloudflare bot block on every notice.co HTML path; existence undetermined, not confirmed absent.
+  note: >-
+    No status page could be confirmed. No StatusPage pointer is emitted - a pointer would assert a
+    surface that has not been shown to exist.
+data_freshness:
+  claim: 'Notice Price recomputed and published every three seconds; API retrieval up to once per minute'
+  source: https://learn.notice.co/en/articles/8338741-how-is-notice-price-determined
+support:
+  channel: help centre + live chat with Customer Success
+  url: https://learn.notice.co/en/articles/8590059-how-do-i-get-support

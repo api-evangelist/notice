@@ -1,0 +1,82 @@
+generated: '2026-08-26'
+method: probed
+source: live probes of api.notice.co plus the Notice help centre
+summary: >-
+  What can be said about Notice's cross-cutting API semantics from outside the paywall, and no
+  more. The REST v1 API returns 401 to anonymous callers, so pagination, filtering, expansion and
+  the success envelope are all unobservable. Auth, versioning, the error envelope and the CORS
+  posture are observable and recorded.
+auth_style:
+  mcp: OAuth 2.0 authorization-code + PKCE (S256), bearer token; see ../authentication/notice-authentication.yml
+  rest: undocumented publicly; endpoint returns 401 to anonymous callers
+versioning:
+  style: path
+  pattern: https://api.notice.co/v1/...
+  current: v1
+  evidence: /v1/openapi.json and /v1/ both resolve (401 rather than 404, so the version segment is real)
+  policy_published: false
+error_envelope:
+  observed_shape: '{"error": "<message>"}'
+  content_type: application/json; charset=utf-8
+  examples:
+    - status: 401
+      body: '{"error":"Not authorized"}'
+      endpoint: GET https://api.notice.co/v1/openapi.json
+    - status: 401
+      body: '{"error":"unauthorized"}'
+      endpoint: POST https://api.notice.co/mcp
+  rfc9457: false
+  note: >-
+    Two different casings/strings for the same condition on the same host. No error catalogue is
+    published, so no errors/ artifact is emitted and no ErrorCatalog pointer is claimed.
+pagination:
+  documented: false
+  note: unobservable behind the 401
+rate_limit_signaling:
+  headers_observed: []
+  documented_limit: 'refresh cadence of up to once per minute (see ../rate-limits/notice-rate-limits.yml)'
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header appeared on any anonymous response. The
+    published limit is a data-refresh cadence, not a request quota, and no exhaustion status code
+    is documented.
+idempotency:
+  supported: unknown
+  note: >-
+    No Idempotency-Key header is documented or observable. NO Idempotency pointer is emitted - the
+    published API is described as a data-retrieval API and nothing states a retry-safety contract.
+dry_run_mode:
+  supported: na
+  note: read-only data API; nothing to rehearse.
+reversibility:
+  grade: na
+  assessed: true
+  write_surface: none-public
+  note: >-
+    The publicly described Notice API is read-only - the help centre describes it as retrieving
+    real-time private market data (Notice Price, verified trades, indications of interest) into a
+    subscriber's own systems, and names no create/update/delete operation. Write actions on the
+    Notice platform (placing, editing or cancelling an indication of interest) are documented only
+    as product features of notice.co itself, where the help centre states an open indication can be
+    edited or cancelled by the member; no API operation, operationId, or time window is published
+    for that, so no window is asserted here. reversibility, dry_run_mode and idempotency are all
+    na for the published read-only surface rather than scored zero.
+    Reference: https://learn.notice.co/en/articles/8412107-how-do-i-edit-or-cancel-an-open-indication
+cors:
+  mcp_endpoint:
+    access_control_allow_origin: https://notice.co
+    access_control_allow_credentials: true
+    exposed_headers: [X-Stytch-Session-JWT]
+  rest_v1:
+    access_control_allow_origin: '*'
+    allowed_methods: [POST, GET, OPTIONS, PUT, DELETE]
+  note: >-
+    The v1 REST plane advertises PUT and DELETE in Access-Control-Allow-Methods, which hints at a
+    write surface, but no public documentation describes one. Recorded as a hint, not a finding.
+agent_posture:
+  robots_txt: https://notice.co/robots.txt
+  note: >-
+    Notice takes an explicit, unusually granular position on agents: GPTBot and ClaudeBot are
+    disallowed outright, AI search crawlers (OAI-SearchBot, Claude-SearchBot) and user-triggered
+    fetchers (ChatGPT-User, Claude-User) are allowed, and /graphql, /portfolio, /orderbook,
+    /trade/, /indication/ and /admin are disallowed for everyone. A GraphQL surface therefore
+    exists at https://notice.co/graphql but is robots-disallowed, so it was NOT introspected.

@@ -1,0 +1,58 @@
+# Block training crawlers
+User-agent: GPTBot
+User-agent: ClaudeBot
+Disallow: /
+
+# Allow AI search/indexing crawlers, with Notice's normal restrictions
+User-agent: OAI-SearchBot
+User-agent: Claude-SearchBot
+Disallow: /admin
+Disallow: /brokers
+Disallow: /inbox
+Disallow: /screeners/indications
+Disallow: /screeners/financings
+Disallow: /portfolio
+Disallow: /orderbook
+Disallow: /settings
+Disallow: /teams
+Disallow: /i/
+Disallow: /indication/
+Disallow: /trade/
+Disallow: /grant/
+Disallow: /my/
+Disallow: /applications
+Disallow: /suspended
+Disallow: /_next
+Disallow: /graphql
+Disallow: /unsubscribe
+Disallow: /cdn-cgi/
+
+# Allow user-triggered fetchers
+User-agent: ChatGPT-User
+User-agent: Claude-User
+Allow: /
+
+# Everyone else
+User-agent: *
+Disallow: /admin
+Disallow: /brokers
+Disallow: /inbox
+Disallow: /screeners/indications
+Disallow: /screeners/financings
+Disallow: /portfolio
+Disallow: /orderbook
+Disallow: /settings
+Disallow: /teams
+Disallow: /i/
+Disallow: /indication/
+Disallow: /trade/
+Disallow: /grant/
+Disallow: /my/
+Disallow: /applications
+Disallow: /suspended
+Disallow: /_next
+Disallow: /graphql
+Disallow: /unsubscribe
+Disallow: /cdn-cgi/
+
+Sitemap: https://notice.co/sitemap_priority.xml

@@ -1,0 +1,59 @@
+generated: '2026-08-26'
+method: searched
+source: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
+also_source:
+  - https://notice.co/
+  - https://learn.notice.co/en/articles/8686326-is-the-notice-pro-plan-available-with-a-monthly-term
+  - https://learn.notice.co/en/articles/8686303-what-are-the-terms-of-use-for-notice-plans
+summary: >-
+  Notice sells a consumer/professional subscription (Notice Pro / Premium) on notice.co and a
+  separate enterprise API subscription. NO PRICE FIGURE IS RECORDED: notice.co and every
+  learn.notice.co article page answer HTTP 403 to non-browser clients (Cloudflare bot block), so
+  the price table was never legible to this pass, and the API tier is explicitly quoted rather than
+  listed. Tier names and terms below are quoted from Notice's own help-centre and site copy as
+  surfaced through search-engine extraction of those same pages.
+currency: USD
+plan_count: 3
+plans:
+  - name: Free
+    price: null
+    currency: USD
+    period: null
+    included: >-
+      Free access to Notice data, tools and the broker network at a base level; company profiles,
+      rankings, indexes and screeners are publicly browsable.
+    limits: 'Premium data and the more powerful research tools are withheld'
+    source: https://notice.co/
+  - name: Notice Pro / Premium
+    price: null
+    currency: USD
+    period: annual
+    included: >-
+      More data and more powerful tools for professional investors; Premium access is sold at the
+      company level, so a subscriber pays only for the companies they need. Pro members additionally
+      see daily M&A exit values on Notice Price charts for 400+ companies.
+    billing_note: >-
+      The help centre carries a dedicated article on whether the Pro plan is available with a
+      monthly term, which indicates the default term is annual.
+    limits: unknown
+    source: https://learn.notice.co/en/articles/8686326-is-the-notice-pro-plan-available-with-a-monthly-term
+  - name: Notice API (enterprise)
+    price: null
+    currency: USD
+    period: annual
+    term: 12 months
+    included: >-
+      Enterprise access to the entire Notice database through the Notice API - real-time private
+      market data for 6,000+ companies, including Notice Price, verified trades and indications of
+      interest.
+    pricing_model: >-
+      Quoted. "Pricing is determined by the data you wish to subscribe to, and there is a 12 month
+      subscription term."
+    contact_sales: true
+    source: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
+price_transparency:
+  api_tier_price_published: false
+  note: >-
+    The API tier is a contact-sales product by Notice's own description. The consumer tier prices
+    may well be listed on notice.co/pricing, but that page was not readable by this pass (403), so
+    no figure is recorded rather than a guessed one.

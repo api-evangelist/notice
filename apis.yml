@@ -1,23 +1,161 @@
 aid: notice
 name: Notice
-description: 'Notice is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Notice (notice.co) is a private-market data and investing platform founded in 2021 by Philip West
+  and Tyson Hendricksen and headquartered in Wilmington, Delaware. It publishes Notice Price, a
+  real-time evaluated price for private company stock recomputed every three seconds from private
+  market transactions, indications of interest and public comparables, alongside company profiles,
+  rankings, industry screeners and the Notice.co 50 Index (N50) covering 6,000+ private companies.
+  Its commercial surface is a RESTful enterprise API that imports that same real-time data - Notice
+  Price, verified trades and indications of interest - into a subscriber's own systems, plus a live
+  OAuth-protected MCP server at api.notice.co/mcp and a free embeddable chart widget. Notice shares
+  trade on secondary marketplaces including Forge and Nasdaq Private Market.
 url: https://raw.githubusercontent.com/api-evangelist/notice/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-harvest-listing: https://forgeglobal.com/notice_stock/
+x-tier: profiled
+x-tier-reason: enrichment-pass
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
-apis: []
+- Private Markets
+- Market Data
+- Financial Data
+- Investing
+- Pre-IPO
+- Secondary Markets
+- Valuations
+- Fintech
+- MCP
+apis:
+- name: Notice API
+  description: >-
+    RESTful enterprise API for real-time private market data across 6,000+ companies - Notice Price,
+    verified trades and indications of interest - retrievable up to once per minute. Sold as a
+    12-month enterprise subscription priced by the data subscribed to; the OpenAPI description at
+    /v1/openapi.json exists as a route but returns 401 to anonymous callers, so no public contract
+    is available.
+  humanURL: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
+  baseURL: https://api.notice.co/v1
+  tags:
+  - Market Data
+  - Private Markets
+  - REST
+  properties:
+  - type: Documentation
+    url: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
+  - type: RateLimits
+    url: rate-limits/notice-rate-limits.yml
+  - type: Plans
+    url: plans/notice-plans-pricing.yml
+  - type: Authentication
+    url: authentication/notice-authentication.yml
+- name: Notice MCP Server
+  description: >-
+    Live remote Model Context Protocol server for Notice, discovered by probe. Anonymous JSON-RPC
+    calls return an RFC 9728-linked 401 challenge; the tool list requires an authenticated Notice
+    OAuth session, so tool names and input schemas are not recorded.
+  humanURL: https://notice.co/
+  baseURL: https://api.notice.co/mcp
+  tags:
+  - MCP
+  - Agents
+  properties:
+  - type: MCPServer
+    url: mcp/notice-mcp.yml
+  - type: Authentication
+    url: authentication/notice-authentication.yml
+  - type: OAuthScopes
+    url: scopes/notice-scopes.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/notice-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/notice_stock/
+  url: https://notice.co
+- type: Documentation
+  url: https://learn.notice.co/en/
+- type: Support
+  url: https://learn.notice.co/en/articles/8590059-how-do-i-get-support
+- type: GitHubOrganization
+  url: https://github.com/notice-co
+- type: LLMsTxt
+  url: llms/notice-llms.txt
+- type: WellKnown
+  url: well-known/notice-well-known.yml
+- type: MCPServer
+  url: mcp/notice-mcp.yml
+- type: Authentication
+  url: authentication/notice-authentication.yml
+- type: OAuthScopes
+  url: scopes/notice-scopes.yml
+- type: Conformance
+  url: conformance/notice-conformance.yml
+- type: Conventions
+  url: conventions/notice-conventions.yml
+- type: Lifecycle
+  url: lifecycle/notice-lifecycle.yml
+- type: ChangeLog
+  url: changelog/notice-changelog.yml
+- type: Plans
+  url: plans/notice-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/notice-rate-limits.yml
+- type: Components
+  url: components/notice-components.yml
+
+x-pointer-checks:
+  checked: '2026-08-26'
+  method: probed with a nonsense-path control per host (roadmap#16/#37)
+  note: >-
+    Every notice.co and learn.notice.co path - including a nonsense control path - returns an
+    identical HTTP 403 Cloudflare block to non-browser clients, with the same 403 for a full
+    browser User-Agent. That is a blanket edge policy against automated clients, not a dead page:
+    each URL below is corroborated either by Notice's own llms.txt (which lists it as a canonical
+    entry point) or by the page being indexed and titled in web search. Recorded as `refused`
+    (our state), never as dead.
+  pointers:
+    - url: https://notice.co
+      status: 403
+      verdict: refused
+      corroboration: listed as the first entry in https://notice.co/llms.txt
+    - url: https://learn.notice.co/en/
+      status: 403
+      verdict: refused
+      corroboration: listed under "Learn more" in https://notice.co/llms.txt
+    - url: https://learn.notice.co/en/articles/8590059-how-do-i-get-support
+      status: 403
+      verdict: refused
+      corroboration: listed in https://learn.notice.co/llms.txt as "How do I get support?"
+    - url: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
+      status: 403
+      verdict: refused
+      corroboration: listed in https://learn.notice.co/llms.txt and indexed in web search
+    - url: https://github.com/notice-co
+      status: 200
+      verdict: live
+      corroboration: 'GitHub API: org "Notice", blog https://notice.co, created 2021-04-26'
+  control:
+    - url: https://notice.co/zzz-nonsense-control-9182
+      status: 403
+    - url: https://learn.notice.co/zzz-nonsense-control-9182
+      status: 403
+  not_emitted:
+    - types: [Pricing, SignUp, TermsOfService, PrivacyPolicy, APIReference, StatusPage]
+      reason: >-
+        These pages very likely exist (Notice's own footer and search results reference terms,
+        privacy and pricing), but the 403 blanket makes every candidate URL indistinguishable from
+        a 404, so no pointer is asserted on a URL this pass could not confirm.
+
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1

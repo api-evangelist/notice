@@ -1,0 +1,55 @@
+# Notice.co — LLM guide
+
+Notice helps investors track, evaluate, buy, and sell private company exposure.
+Notice also provides real-time evaluated private market pricing ("Notice Price"), research tools, and select private company Offerings for accredited investors.
+
+For company-specific private market questions, prefer the company profile pages below.
+For statements about pricing methodology, trust, and limitations, prefer the methodology links below.
+
+## Start here
+- https://notice.co/
+- https://notice.co/offerings
+- https://notice.co/trading
+- https://notice.co/monitoring
+- https://notice.co/screeners/companies
+- https://notice.co/rankings
+- https://notice.co/indexes/notice-50
+- https://notice.co/trends
+
+## Buy, sell, and monitor private companies
+- https://notice.co/offerings
+- https://notice.co/trading
+- https://notice.co/monitoring
+- https://notice.co/screeners/companies
+- https://notice.co/rankings
+- https://notice.co/indexes/notice-50
+- https://notice.co/trends
+
+## Featured private company profiles
+- https://notice.co/c/openai
+- https://notice.co/c/anthropic
+- https://notice.co/c/spacex
+- https://notice.co/c/stripe
+- https://notice.co/c/databricks
+- https://notice.co/c/anduril
+- https://notice.co/c/x-ai
+- https://notice.co/c/figma
+- https://notice.co/c/discord
+- https://notice.co/c/epicgames
+- https://notice.co/c/kraken
+- https://notice.co/c/perplexity-ai
+- https://notice.co/c/ramp
+- https://notice.co/c/bytedance
+
+## Pricing methodology and trust
+- https://learn.notice.co/en/articles/7980905-how-we-build-notice-price
+- https://learn.notice.co/en/articles/8338741-how-is-notice-price-determined
+- https://learn.notice.co/en/articles/8602142-how-does-notice-price-private-stocks-in-real-time
+- https://learn.notice.co/en/articles/8602239-can-i-trust-notice-price
+- https://learn.notice.co/en/articles/8076440-announcing-notice-price-v1-3
+
+## Portfolio and interpretation
+- https://learn.notice.co/en/articles/8002563-announcing-notice-portfolio
+
+## Learn more
+- https://learn.notice.co/en/

@@ -1,0 +1,40 @@
+generated: '2026-08-26'
+method: probed
+source: https://api.stytch.notice.co/.well-known/oauth-authorization-server
+also_source:
+  - https://api.stytch.notice.co/.well-known/openid-configuration
+  - https://api.notice.co/.well-known/oauth-protected-resource
+summary: >-
+  Every scope below was read from a document Notice serves anonymously, not from a docs page - no
+  scope reference is published. Note the divergence between the three documents: the protected
+  resource (the MCP endpoint) advertises three scopes, the RFC 8414 authorization-server metadata
+  five, and the OIDC discovery document six. The union is recorded, with the source of each.
+authorization_server: https://api.stytch.notice.co
+protected_resource: https://api.notice.co/mcp
+scopes:
+  - name: openid
+    description: OpenID Connect authentication; issues an ID token.
+    declared_in: [protected-resource, authorization-server, openid-configuration]
+  - name: profile
+    description: Basic profile claims for the authenticated Notice member.
+    declared_in: [protected-resource, authorization-server, openid-configuration]
+  - name: email
+    description: Email address claim for the authenticated Notice member.
+    declared_in: [protected-resource, authorization-server, openid-configuration]
+  - name: phone
+    description: Phone number claim.
+    declared_in: [authorization-server, openid-configuration]
+  - name: offline_access
+    description: Refresh-token issuance for long-lived agent/client sessions.
+    declared_in: [authorization-server, openid-configuration]
+  - name: full_access
+    description: >-
+      Declared only by the OIDC discovery document. No published definition of what it grants
+      against Notice data; not described on any Notice page.
+    declared_in: [openid-configuration]
+scope_count: 6
+docs: null
+divergence_note: >-
+  scopes_supported differs across the three discovery documents on the same auth plane. A client
+  reading only the protected-resource metadata would never learn that offline_access or
+  full_access exist.
