@@ -114,6 +114,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Pricing
+  url: https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work
 - type: DomainSecurity
   url: security/notice-domain-security.yml
 - type: Website
