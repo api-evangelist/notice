@@ -57,3 +57,29 @@ price_transparency:
     The API tier is a contact-sales product by Notice's own description. The consumer tier prices
     may well be listed on notice.co/pricing, but that page was not readable by this pass (403), so
     no figure is recorded rather than a guessed one.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Notice Pro / Premium
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Notice API (enterprise)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - year
