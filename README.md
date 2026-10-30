@@ -64,5 +64,115 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Notice is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/notice_stock/
+Notice (notice.co) is a private-market data and investing platform founded in 2021 by Philip West and Tyson Hendricksen and headquartered in Wilmington, Delaware. It publishes Notice Price, a real-time evaluated price for private company stock recomputed every three seconds from private market transactions, indications of interest and public comparables, alongside company profiles, rankings, industry screeners and the Notice.co 50 Index (N50) covering 6,000+ private companies. Its commercial surface is a RESTful enterprise API that imports that same real-time data - Notice Price, verified trades and indications of interest - into a subscriber's own systems, plus a live OAuth-protected MCP server at api.notice.co/mcp and a free embeddable chart widget. Notice shares trade on secondary marketplaces including Forge and Nasdaq Private Market.
+
+**Areas:** Company · Private Markets · Market Data · Financial Data · Investing · Pre-IPO · Secondary Market · Valuation · Fintech · MCP
+
+## Notice on APIs.io
+
+Everything profiled for Notice is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/notice/](https://apis.io/providers/notice/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Notice API](https://apis.io/apis/notice/notice-api/) — RESTful enterprise API for real-time private market data across 6,000+ companies - Notice Price, verified trades and indications of interest - retrievable…
+- [Notice MCP Server](https://apis.io/apis/notice/notice-mcp-server/) — Live remote Model Context Protocol server for Notice, discovered by probe. Anonymous JSON-RPC calls return an RFC 9728-linked 401 challenge; the tool list…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [notice](https://apis.io/servers/notice/notice/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Notice Authentication](https://apis.io/security/notice/notice-authentication/)
+- [Notice Domain Security](https://apis.io/security/notice/notice-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Notice Scopes](https://apis.io/scopes/notice/notice-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Notice Plans Pricing](https://apis.io/plans/notice/notice-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Notice Rate Limits](https://apis.io/rate-limits/notice/notice-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://notice.co)
+- [Documentation](https://learn.notice.co/en/)
+- [Pricing](https://learn.notice.co/en/articles/8422141-how-does-the-notice-api-work)
+- [Support](https://learn.notice.co/en/articles/8590059-how-do-i-get-support)
+- [GitHub](https://github.com/notice-co)
+
+## API Evangelist rating
+
+**Kin Score 29.6** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 42.1 |
+
+**Agent readiness 29.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 30.6** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/notice/](https://apis.io/providers/notice/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Notice: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/notice/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
